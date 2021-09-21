@@ -3,6 +3,7 @@
 require 'test_helper'
 
 class Stats::Api::ServicesControllerTest < ActionController::TestCase
+  extend Shoulda::Matchers::ActionController
 
   should route(:get, '/stats/api/services/1/usage.json').to :service_id => '1', :action => 'usage', :format => 'json'
   should route(:get, '/stats/api/services/1/usage.xml').to :service_id => '1', :action => 'usage', :format => 'xml'

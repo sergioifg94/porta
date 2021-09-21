@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
 
   def browser_not_modern?
     browser = Browser.new(request.env['HTTP_USER_AGENT'])
-    browser.known? && !browser.modern?
+    browser.known? && !browser.modern? # TODO: update browser: browser.known? && !modern_browser?(browser)
   end
 
   def cors

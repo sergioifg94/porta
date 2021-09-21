@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class Provider::Admin::Messages::OutboxControllerTest < ActionController::TestCase
 
   class RoutingTest < ActionController::TestCase
+    extend Shoulda::Matchers::ActionController
+
     def setup
       ProviderDomainConstraint.stubs(matches?: true)
       MasterDomainConstraint.stubs(matches?: true)

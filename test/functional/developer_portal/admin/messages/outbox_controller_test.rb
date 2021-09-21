@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class DeveloperPortal::Admin::Messages::OutboxControllerTest < DeveloperPortal::ActionController::TestCase
+  extend Shoulda::Matchers::ActionController
+
   with_options :controller => 'messages/outbox' do |test|
     test.should route(:get, '/admin/messages/sent').to :action => 'index'
     test.should route(:get, '/admin/messages/new').to :action => 'new'
@@ -21,7 +25,7 @@ class DeveloperPortal::Admin::Messages::OutboxControllerTest < DeveloperPortal::
   test "creates messages with origin == 'web'" do
     buyer = FactoryBot.create :buyer_account, :provider_account => @provider
 
-    post :create, :message => { :subject => "message via web", :body => "message via web" }, :to => buyer.id
+    post :create, params: { message: { subject: "message via web", body: "message via web" } }, to: buyer.id
 
     MessageWorker.drain
     assert msg = Message.last

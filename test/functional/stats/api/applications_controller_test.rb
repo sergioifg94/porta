@@ -5,12 +5,12 @@ require 'test_helper'
 class Stats::Api::ApplicationsControllerTest < ActionController::TestCase
   extend Shoulda::Matchers::ActionController
 
-  should route(:get, '/stats/api/applications/42/usage.json').to :application_id => '42', :action => 'usage', :format => 'json'
+  should route(:get, '/stats/api/applications/42/usage').to :id => '42', :action => 'usage', :format => 'json'
 
   def test_summary
     setup_data(login_as: :buyer)
 
-    get :summary, format: :json, application_id: @app.id
+    get :summary, format: :json, params: { application_id: @app.id }
 
     assert_equal 200, response.status
   end
@@ -18,11 +18,11 @@ class Stats::Api::ApplicationsControllerTest < ActionController::TestCase
   test 'csv format for errors' do
     setup_data
 
-    get :usage, format: :csv, application_id: @app.id, period: 'troloro'
+    get :usage, format: :csv, params: { application_id: @app.id, period: 'troloro' }
     assert_match /text\/plain/, response.header['Content-Type']
     assert_equal 400, response.status
 
-    get :usage_response_code, format: :csv, application_id: @app.id, period: 'troloro'
+    get :usage_response_code, format: :csv, params: { application_id: @app.id, period: 'troloro' }
     assert_match /text\/plain/, response.header['Content-Type']
     assert_equal 400, response.status
   end

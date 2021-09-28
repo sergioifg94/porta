@@ -22,7 +22,7 @@ class BaseEventStoreEvent < RailsEventStore::Event
       return unless valid?(*args)
 
       event = create(*args)
-
+      binding.pry_shell if Services::ServiceDeletedEvent === event
       PUBLISHER.call(event) && event
     end
 

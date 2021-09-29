@@ -12,6 +12,9 @@ Before do |scenario|
 
   ThreeScale.config.stubs(superdomain: '3scale.localhost')
 
+  # disable zync
+  ZyncWorker.any_instance.stubs(:valid?).returns(false)
+
   SphinxIndexationWorker.stubs(:perform_later)
   IndexProxyRuleWorker.stubs(:perform_later)
 

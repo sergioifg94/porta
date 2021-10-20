@@ -1382,7 +1382,7 @@ ActiveRecord::Schema.define(version: 20211013204829) do
   end
 
   add_index "tags", ["account_id"], name: "index_tags_on_account_id"
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+  add_index "tags", ["name", "tenant_id"], name: "index_tags_on_name", unique: true
 
   create_table "topic_categories", force: :cascade do |t|
     t.string   "name"

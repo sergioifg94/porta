@@ -1319,7 +1319,7 @@ ActiveRecord::Schema.define(version: 20211013204829) do
     t.bigint   "tenant_id"
     t.integer  "taggings_count",             default: 0
     t.index ["account_id"], name: "index_tags_on_account_id", using: :btree
-    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
+    t.index ["name", "tenant_id"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
   create_table "topic_categories", force: :cascade do |t|

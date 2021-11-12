@@ -45,7 +45,7 @@ class Provider::Admin::Dashboard::WidgetController < Provider::Admin::BaseContro
 
   # @return DashboardWidgetPresenter
   def widget
-    @widget ||= DashboardWidgetPresenter.new(widget_name, params.except(:action, :controller, :format))
+    @widget ||= DashboardWidgetPresenter.new(widget_name, params.to_h.except(:action, :controller, :format))
   end
 
   def widget_name

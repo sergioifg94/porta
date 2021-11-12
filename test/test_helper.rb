@@ -26,7 +26,6 @@ require 'minitest/unit'
 
 require 'rails/test_help'
 require "paperclip/matchers"
-require 'shoulda'
 
 require File.expand_path('../lib/developer_portal/test/test_helper.rb', __dir__)
 
@@ -54,7 +53,6 @@ class ActiveSupport::TestCase
   self.use_transactional_tests = true
   self.use_instantiated_fixtures  = false
 
-  extend Paperclip::Shoulda::Matchers
 
   Aws.config[:s3] = { stub_responses: true }
 
